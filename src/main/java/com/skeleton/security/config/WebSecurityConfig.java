@@ -28,8 +28,8 @@ public class WebSecurityConfig {
         http
             .csrf().disable()
             .authorizeHttpRequests()
-                .requestMatchers("")
-                .permitAll()
+                .requestMatchers("/api/v1/auth/**", "/api/v1/free/**")
+                .permitAll() //white list
                 .anyRequest()
                     .authenticated()
             .and()
