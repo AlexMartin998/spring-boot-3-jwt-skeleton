@@ -7,16 +7,16 @@ This project demonstrates the implementation of security using Spring Boot 3.0 a
 ⚡️ User registration and login with JWT authentication\
 ⚡️ Password encryption using BCrypt\
 ⚡️ Role-based authorization with Spring Security\
-⚡️ Customized access denied handling\
+⚡️ Customized access denied handling
 
 ## Technologies
 
-- Spring Boot 3.0.2
+- Spring Boot 3.0.9
 - Spring Security
 - JSON Web Tokens (JWT)
 - BCrypt
 - Maven
-- PostgreSQL
+- MySQL
 
 ## Getting Started
 
@@ -36,14 +36,13 @@ To build and run the project, follow these steps:
 - Create the required volumes
 
 ```bash
-docker volume create spring_postgresql
-docker volume create spring_pgadmin
+docker volume create spring_mysql
 ```
+
+- Create `.env` file based on the `.env.example` file
 
 ```bash
-docker compose up --build -d
+docker compose -f docker-compose.dev.yml up --build -d
 ```
-
-PgAdmin is accessible through `localhost:80`
 
 -> The application will be available at http://localhost:8080

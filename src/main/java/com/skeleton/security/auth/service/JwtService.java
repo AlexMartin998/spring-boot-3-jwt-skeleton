@@ -89,7 +89,4 @@ public class JwtService {
         return extractExpiration(jwt).before(new Date()); // before 'cause the expiration is th SUM of now and JWT_EXPIRATION_HOURS
     }
 
-    private void somess(){
-        Integer comeInteger = 12 + 21;
-    }
 }
