@@ -26,6 +26,7 @@ public class JwtService {
 //    private static Long JWT_EXPIRATION_HOURS;
     private static final Long JWT_EXPIRATION_HOURS = 24L;
 
+
     public String extractUsername(String jwt) {
         // el Subject deberia ser el   (email,uuid,username)    q vamos a setear en la construccion del JWT
         return extractClaim(jwt, Claims::getSubject);

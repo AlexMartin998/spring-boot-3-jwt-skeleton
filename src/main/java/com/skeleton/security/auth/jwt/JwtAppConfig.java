@@ -1,7 +1,6 @@
 package com.skeleton.security.auth.jwt;
 
 import com.skeleton.security.auth.service.CustomUserDetailsService;
-import com.skeleton.security.users.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,13 +11,15 @@ import org.springframework.security.config.annotation.authentication.configurati
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+
 @Configuration      // register as @Bean Config
 @RequiredArgsConstructor     // Inject all final properties by constructor
 public class JwtAppConfig {
 
-    // Inject in auto by @RequiredArgsConstructor
-    private final UserRepository userRepository;
+    // // Inject in auto by @RequiredArgsConstructor (final attributes - constructor)
     private final CustomUserDetailsService customUserDetailsService;
+    // private final UserRepository userRepository;
+
 
     @Bean   // la 1ra implementacion q Spring va a encontrar para INJECT in  WebSecurityConfig
     public AuthenticationProvider authenticationProvider() {

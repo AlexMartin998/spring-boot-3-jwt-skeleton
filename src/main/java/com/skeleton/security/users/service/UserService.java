@@ -8,6 +8,8 @@ public interface UserService {
 
     Usuario save(Usuario user);
 
+    Usuario findOneByEmail(String email);
+
     boolean existsByEmail(String email);
 
 }

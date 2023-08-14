@@ -6,6 +6,7 @@ import com.skeleton.security.common.constants.RoleType;
 import com.skeleton.security.users.entity.Usuario;
 import com.skeleton.security.users.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
@@ -26,6 +27,13 @@ public class UserServiceImpl implements UserService {
         user.setRoles(Collections.singleton(role));  // Collections.singleton()  --> return  Set<T>
 
         return userRepository.save(user);
+    }
+
+    @Override
+    public Usuario findOneByEmail(String email) {
+        return userRepository.findOneByEmail(email).orElseThrow(
+                () -> new UsernameNotFoundException("User not found with email: ".concat(email))
+        );
     }
 
     @Override
