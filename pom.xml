@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.0.2</version>   <!-- le baje xq  and() estaba deprecated  -->
+		<version>3.0.2</version>   <!-- le baje xq  .and() estaba deprecated  -->
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.skeleton</groupId>
@@ -57,6 +57,22 @@
 			<scope>test</scope>
 		</dependency>
 
+
+
+
+		<!-- Validations DTO/Entity -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-validation</artifactId>
+		</dependency>
+
+
+		<!-- Model Mapper -->
+		<dependency>
+			<groupId>org.modelmapper</groupId>
+			<artifactId>modelmapper</artifactId>
+			<version>3.1.0</version>
+		</dependency>
 
 
 		<!-- JWT -->
