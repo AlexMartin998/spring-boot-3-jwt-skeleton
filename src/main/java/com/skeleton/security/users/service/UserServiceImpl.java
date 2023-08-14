@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 
+
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
@@ -25,6 +26,11 @@ public class UserServiceImpl implements UserService {
         user.setRoles(Collections.singleton(role));  // Collections.singleton()  --> return  Set<T>
 
         return userRepository.save(user);
+    }
+
+    @Override
+    public boolean existsByEmail(String email) {
+        return userRepository.existsByEmail(email);
     }
 
 }
