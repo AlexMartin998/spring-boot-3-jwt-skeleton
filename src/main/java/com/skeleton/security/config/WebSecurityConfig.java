@@ -32,7 +32,7 @@ public class WebSecurityConfig {
         http
             .csrf().disable()
             .exceptionHandling()
-                .authenticationEntryPoint(jwtAuthEntryPoint)    // handle Spring Security Error Response
+                .authenticationEntryPoint(jwtAuthEntryPoint)    // handle Spring Security Error Response / customize error msg
             .and()
             .authorizeHttpRequests()
                 .requestMatchers("/api/v1/auth/**", "/api/v1/free/**")
