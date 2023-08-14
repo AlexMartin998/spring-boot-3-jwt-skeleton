@@ -3,6 +3,8 @@ package com.skeleton.security.users.service;
 import com.skeleton.security.auth.entity.Role;
 import com.skeleton.security.auth.service.RoleService;
 import com.skeleton.security.common.constants.RoleType;
+import com.skeleton.security.common.exceptions.BadRequestException;
+import com.skeleton.security.common.exceptions.ResourceNotFoundException;
 import com.skeleton.security.users.entity.Usuario;
 import com.skeleton.security.users.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -23,7 +25,14 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Usuario save(Usuario user) {
-        Role role = roleService.findOneByName(RoleType.USER_ROLE.name()).orElseThrow();
+        if (userRepository.existsByEmail(user.getEmail())) {
+            throw new BadRequestException("User Already Registered");
+        }
+
+        // TODO: get roles from DTO an map them, by default set an UserRole
+        Role role = roleService.findOneByName(RoleType.USER_ROLE.name()).orElseThrow(
+                () -> new ResourceNotFoundException("User", "name", RoleType.USER_ROLE.name())
+        );
         user.setRoles(Collections.singleton(role));  // Collections.singleton()  --> return  Set<T>
 
         return userRepository.save(user);
