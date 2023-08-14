@@ -5,6 +5,7 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
@@ -18,13 +19,11 @@ import java.util.function.Function;
 @Service    // transform to a managed @Bean of Spring (Inject)
 public class JwtService {
 
-    //    @Value("${app.jwt-secret}")
-//    private static String SECRET_KEY;
-    private static final String SECRET_KEY = "404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970";
+    @Value("${app.security.jwt.secret}")
+    private String SECRET_KEY;  // solo private como modificador de acceso para q no de error
 
-//    @Value("${app.jwt-expiration}")
-//    private static Long JWT_EXPIRATION_HOURS;
-    private static final Long JWT_EXPIRATION_HOURS = 24L;
+    @Value("${app.security.jwt.expiration}")
+    private Long JWT_EXPIRATION_HOURS;
 
 
     public String extractUsername(String jwt) {
@@ -48,8 +47,8 @@ public class JwtService {
                 .setClaims(extraClaims)
                 .setSubject(userDetails.getUsername())  // payload q se va a codificar (email, uuid, usrname)
                 .setIssuedAt(new Date(System.currentTimeMillis()))    // when this jwt was created - to calculate the expiration date
-                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * JWT_EXPIRATION_HOURS))    // setear el tiempo de validez del jwt
-                .signWith(getSigningKey(), SignatureAlgorithm.HS256)   //
+                .setExpiration(new Date(System.currentTimeMillis() + 1000L * 60 * JWT_EXPIRATION_HOURS))    // setear el tiempo de validez del jwt
+                .signWith(getSigningKey(), SignatureAlgorithm.HS256)   // hashcode redomendado
                 .compact();
     }
 
@@ -90,4 +89,7 @@ public class JwtService {
         return extractExpiration(jwt).before(new Date()); // before 'cause the expiration is th SUM of now and JWT_EXPIRATION_HOURS
     }
 
+    private void somess(){
+        Integer comeInteger = 12 + 21;
+    }
 }

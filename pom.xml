@@ -5,7 +5,8 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.0.2</version>   <!-- le baje xq  .and() estaba deprecated  -->
+		<version>3.0.9</version>   <!-- le baje xq  .and() estaba deprecated  -->
+<!--		<version>3.0.2</version>   funca bien el  .and() -->
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.skeleton</groupId>
@@ -37,11 +38,6 @@
 			<optional>true</optional>
 		</dependency>
 		<dependency>
-			<groupId>org.postgresql</groupId>
-			<artifactId>postgresql</artifactId>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<optional>true</optional>
@@ -58,6 +54,12 @@
 		</dependency>
 
 
+		<!-- MySQL Driver -->
+		<dependency>
+			<groupId>com.mysql</groupId>
+			<artifactId>mysql-connector-j</artifactId>
+			<scope>runtime</scope>
+		</dependency>
 
 
 		<!-- Validations DTO/Entity -->
