@@ -1,4 +1,4 @@
-package com.skeleton.security.common;
+package com.skeleton.security.common.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
