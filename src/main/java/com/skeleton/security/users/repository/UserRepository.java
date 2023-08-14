@@ -8,8 +8,8 @@ import java.util.Optional;
 public interface UserRepository extends JpaRepository<Usuario, Long> {
     // JpaRepository x default me da el Page para el  .findAll()
 
-    public Optional<Usuario> findOneByEmail(String email);
+    Optional<Usuario> findOneByEmail(String email);
 
-    public Boolean existsByEmail(String email);
+    Boolean existsByEmail(String email);
 
 }

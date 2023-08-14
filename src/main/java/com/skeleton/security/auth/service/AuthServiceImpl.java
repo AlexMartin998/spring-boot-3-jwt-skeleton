@@ -4,19 +4,14 @@ import com.skeleton.security.auth.dto.AuthResponseDto;
 import com.skeleton.security.auth.dto.LoginDto;
 import com.skeleton.security.auth.dto.LoginResponseDto;
 import com.skeleton.security.auth.dto.RegisterRequestDto;
-import com.skeleton.security.auth.entity.Role;
-import com.skeleton.security.auth.repository.RoleRepository;
-import com.skeleton.security.common.constants.RoleType;
 import com.skeleton.security.users.entity.Usuario;
-import com.skeleton.security.users.repository.UserRepository;
+import com.skeleton.security.users.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.util.Collections;
 
 
 @Service
@@ -26,8 +21,7 @@ public class AuthServiceImpl implements AuthService {
     // Auto Inject by Constructor thanks to @RequiredArgsConstructor (FINAL properties)
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
-    private final RoleRepository roleRepository;
-    private final UserRepository userRepository;
+    private final UserService userService;
     private final CustomUserDetailsService customUserDetailsService;
 
     private final ModelMapper modelMapper;
@@ -37,10 +31,8 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public AuthResponseDto register(RegisterRequestDto request) {
         Usuario user = mapToEntity(request);
-        Role role = roleRepository.findOneByName(RoleType.USER_ROLE.name()).get();
-        user.setRoles(Collections.singleton(role));
 
-        Usuario newUser = userRepository.save(user);
+        Usuario newUser = userService.save(user);
 
         return mapToDto(newUser);
     }
