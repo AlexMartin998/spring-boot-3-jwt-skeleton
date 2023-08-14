@@ -1,5 +1,6 @@
 package com.skeleton.security.config;
 
+import com.skeleton.security.auth.jwt.JwtAuthEntryPoint;
 import com.skeleton.security.auth.jwt.JwtAuthFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -23,12 +24,16 @@ public class WebSecurityConfig {
     // Autowired en auto xq son FINAL <-- @RequiredArgsConstructor
     private final JwtAuthFilter jwtAuthFilter;
     private final AuthenticationProvider authenticationProvider;
+    private final JwtAuthEntryPoint jwtAuthEntryPoint;
 
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
             .csrf().disable()
+            .exceptionHandling()
+                .authenticationEntryPoint(jwtAuthEntryPoint)    // handle Spring Security Error Response
+            .and()
             .authorizeHttpRequests()
                 .requestMatchers("/api/v1/auth/**", "/api/v1/free/**")
                 .permitAll() //white list
