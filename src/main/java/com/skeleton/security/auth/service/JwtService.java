@@ -19,12 +19,13 @@ import java.util.function.Function;
 @Service    // transform to a managed @Bean of Spring (Inject)
 public class JwtService {
 
-    @Value("${app.jwt-secret}")
-    private static String SECRET_KEY;
-    //    private static final String SECRET_KEY = "404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970";
+    //    @Value("${app.jwt-secret}")
+//    private static String SECRET_KEY;
+    private static final String SECRET_KEY = "404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970";
 
-    @Value("${app.jwt-expiration}")
-    private static Long JWT_EXPIRATION_HOURS;
+//    @Value("${app.jwt-expiration}")
+//    private static Long JWT_EXPIRATION_HOURS;
+    private static final Long JWT_EXPIRATION_HOURS = 24L;
 
     public String extractUsername(String jwt) {
         // el Subject deberia ser el   (email,uuid,username)    q vamos a setear en la construccion del JWT

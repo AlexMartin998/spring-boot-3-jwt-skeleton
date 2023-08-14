@@ -7,6 +7,6 @@ import java.util.Optional;
 
 public interface RoleRepository extends CrudRepository<Role, Long> {
 
-    public Optional<Role> findOneByName(String name);
+    Optional<Role> findOneByName(String name);
 
 }

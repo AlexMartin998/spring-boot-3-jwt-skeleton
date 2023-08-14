@@ -7,7 +7,7 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update  # c/levante el project se actualizaran las tablas basado en el schema/models
-    show-sql: true
+#    show-sql: true
     properties:
       hibernate:
         format_sql: true
