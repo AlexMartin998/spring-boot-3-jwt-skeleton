@@ -6,7 +6,7 @@ import com.skeleton.security.auth.dto.LoginResponseDto;
 import com.skeleton.security.auth.dto.RegisterRequestDto;
 import com.skeleton.security.auth.entity.Role;
 import com.skeleton.security.auth.repository.RoleRepository;
-import com.skeleton.security.common.RoleType;
+import com.skeleton.security.common.constants.RoleType;
 import com.skeleton.security.users.entity.Usuario;
 import com.skeleton.security.users.repository.UserRepository;
 import lombok.RequiredArgsConstructor;

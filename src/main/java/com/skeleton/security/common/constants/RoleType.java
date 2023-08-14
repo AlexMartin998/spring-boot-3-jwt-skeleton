@@ -1,4 +1,4 @@
-package com.skeleton.security.common;
+package com.skeleton.security.common.constants;
 
 
 public enum RoleType {
