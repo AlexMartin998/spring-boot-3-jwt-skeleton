@@ -5,9 +5,11 @@ import com.skeleton.security.auth.service.RoleService;
 import com.skeleton.security.common.constants.RoleType;
 import com.skeleton.security.common.exceptions.BadRequestException;
 import com.skeleton.security.common.exceptions.ResourceNotFoundException;
+import com.skeleton.security.users.dto.UserResponseDto;
 import com.skeleton.security.users.entity.Usuario;
 import com.skeleton.security.users.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +23,8 @@ public class UserServiceImpl implements UserService {
     // Auto Inject by Constructor thanks to @RequiredArgsConstructor (FINAL properties)
     private final RoleService roleService;
     private final UserRepository userRepository;
+
+    private final ModelMapper modelMapper;
 
 
     @Override
@@ -48,6 +52,15 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean existsByEmail(String email) {
         return userRepository.existsByEmail(email);
+    }
+
+    @Override
+    public UserResponseDto findOne(Long id) {
+        Usuario user = userRepository.findById(id).orElseThrow(
+                () -> new UsernameNotFoundException("User not found with email: ".concat(id.toString()))
+        );
+
+        return modelMapper.map(user, UserResponseDto.class);
     }
 
 }
