@@ -90,6 +90,22 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {    
     }
 
 
+    // // User not found exception
+    @ExceptionHandler(UserNotFoundException.class)
+    public ResponseEntity<ErrorDetails> handlerUserNotFoundException(
+            UserNotFoundException exception,
+            WebRequest webRequest
+    ) {
+        ErrorDetails errorDetails = ErrorDetails.builder()
+                .timeStamp(new Date())
+                .message(exception.getMessage())
+                .details(webRequest.getDescription(false))
+                .build();
+
+        return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
+    }
+
+
     // // Default Exception (for ALL others)
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorDetails> handlerGlobalException(Exception exception, WebRequest webRequest) {

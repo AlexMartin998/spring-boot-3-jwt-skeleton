@@ -5,12 +5,12 @@ import com.skeleton.security.auth.service.RoleService;
 import com.skeleton.security.common.constants.RoleType;
 import com.skeleton.security.common.exceptions.BadRequestException;
 import com.skeleton.security.common.exceptions.ResourceNotFoundException;
+import com.skeleton.security.common.exceptions.UserNotFoundException;
 import com.skeleton.security.users.dto.UserResponseDto;
 import com.skeleton.security.users.entity.Usuario;
 import com.skeleton.security.users.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
@@ -28,7 +28,7 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public Usuario save(Usuario user) {
+    public Usuario create(Usuario user) {
         if (userRepository.existsByEmail(user.getEmail())) {
             throw new BadRequestException("User Already Registered");
         }
@@ -45,7 +45,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public Usuario findOneByEmail(String email) {
         return userRepository.findOneByEmail(email).orElseThrow(
-                () -> new UsernameNotFoundException("User not found with email: ".concat(email))
+                () -> new UserNotFoundException("User not found with email: ".concat(email))
         );
     }
 
@@ -57,7 +57,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserResponseDto findOne(Long id) {
         Usuario user = userRepository.findById(id).orElseThrow(
-                () -> new UsernameNotFoundException("User not found with email: ".concat(id.toString()))
+                () -> new UserNotFoundException("User not found with id: ".concat(id.toString()))
         );
 
         return modelMapper.map(user, UserResponseDto.class);

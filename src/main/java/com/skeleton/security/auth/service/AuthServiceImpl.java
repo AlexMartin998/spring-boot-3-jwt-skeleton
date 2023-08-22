@@ -32,7 +32,7 @@ public class AuthServiceImpl implements AuthService {
     public AuthResponseDto register(RegisterRequestDto request) {
         Usuario user = mapToEntity(request);
 
-        Usuario newUser = userService.save(user);
+        Usuario newUser = userService.create(user);
 
         return mapToDto(newUser);
     }
