@@ -12,6 +12,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collections;
+
 
 @Service
 @RequiredArgsConstructor
@@ -31,7 +33,7 @@ public class UserServiceImpl implements UserService {
         Role role = roleRepository.findByName(RoleConstants.USER).orElseThrow(
                 () -> new ResourceNotFoundException("Role", "name", RoleConstants.USER)
         );
-        user.setRole(role);  // Collections.singleton()  --> return  Set<T>
+        user.setRoles(Collections.singleton(role));  // Collections.singleton()  --> return  Set<T>
 
         return userRepository.save(user);
     }

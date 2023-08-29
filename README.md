@@ -12,7 +12,7 @@ This project demonstrates the implementation of security using Spring Boot 3.0 a
 
 ## Technologies
 
-- Spring Boot 3.0.10
+- Spring Boot 2.7.15
 - Spring Security
 - JSON Web Tokens (JWT)
 - BCrypt

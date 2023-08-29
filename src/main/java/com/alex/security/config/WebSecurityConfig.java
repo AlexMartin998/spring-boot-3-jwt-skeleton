@@ -36,8 +36,8 @@ public class WebSecurityConfig {
                     .authenticationEntryPoint(jwtAuthEntryPoint)    // handle Spring Security Error Response / customize error msg
                 .and()
                 .authorizeHttpRequests()
-                    .requestMatchers("/api/v1/auth/register", "/api/v1/auth/login","/api/v1/free/**")
-                    .permitAll() //white list
+                    .antMatchers("/api/v1/auth/register", "/api/v1/auth/login","/api/v1/free/**")
+                        .permitAll() //white list
                     .anyRequest()
                         .authenticated()
                 .and()

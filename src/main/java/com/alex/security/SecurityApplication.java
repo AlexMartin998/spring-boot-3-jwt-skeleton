@@ -8,15 +8,16 @@ import org.springframework.context.annotation.Bean;
 @SpringBootApplication
 public class SecurityApplication {
 
-    @Bean
-    public ModelMapper modelMapper() {
-        // register as a @Bean to inject
-        return new ModelMapper();
-    }
+	@Bean
+	public ModelMapper modelMapper() {
+		// register as a @Bean to inject
+		return new ModelMapper();
+	}
 
 
-    public static void main(String[] args) {
-        SpringApplication.run(SecurityApplication.class, args);
-    }
+
+	public static void main(String[] args) {
+		SpringApplication.run(SecurityApplication.class, args);
+	}
 
 }

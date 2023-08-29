@@ -1,5 +1,6 @@
 package com.alex.security.auth.jwt;
 
+import com.alex.security.auth.entity.Role;
 import com.alex.security.users.entity.Usuario;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -8,7 +9,8 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
-import java.util.Collections;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 
 @Getter
@@ -21,7 +23,7 @@ public class UserDetailsImpl implements UserDetails {
     // Roles
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.singleton(new SimpleGrantedAuthority(user.getRole().getName()));
+        return mapRoles(user.getRoles());
     }
 
     @Override
@@ -53,6 +55,12 @@ public class UserDetailsImpl implements UserDetails {
     public boolean isEnabled() {
         // soft delete validation
         return !user.isDeleted();
+    }
+
+
+    // map all user roles
+    private Collection<? extends GrantedAuthority> mapRoles(Set<Role> roles) {
+        return roles.stream().map(rol -> new SimpleGrantedAuthority(rol.getName())).collect(Collectors.toSet());
     }
 
 }

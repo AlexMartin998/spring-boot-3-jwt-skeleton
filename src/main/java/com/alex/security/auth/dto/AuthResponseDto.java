@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 
 @Data
 @Builder
@@ -21,7 +23,7 @@ public class AuthResponseDto {
         private String firstname;
         private String lastname;
         private String email;
-        private RoleDto role;
+        private List<RoleDto> roles;
     }
 
     @Data
@@ -31,4 +33,3 @@ public class AuthResponseDto {
     }
 
 }
-

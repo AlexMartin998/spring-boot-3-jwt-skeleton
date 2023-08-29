@@ -15,7 +15,6 @@ import java.security.Key;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 import java.util.function.Function;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -105,14 +104,14 @@ public class JwtService {
                     .build()    // xq es 1 builder
                     .parseClaimsJws(jwt)    // parse el JWT para extraer los claims
                     .getBody();     // cuando hace el parse puede obtener los claims y en este caso queremos el body
-        } catch (SecurityException ex) {    // invalid signature
-            throw new BadRequestException("Invalid Token Signature");
         } catch (MalformedJwtException | UnsupportedJwtException ex) {
             throw new BadRequestException("Invalid Token");
         } catch (ExpiredJwtException ex) {
             throw new BadRequestException("Expired Token");
         } catch (IllegalArgumentException ex) {
             throw new BadRequestException("Invalid Token Claims");
+        } catch (SecurityException ex) {    // invalid signature
+            throw new BadRequestException("Invalid Token Signature");
         }
 
         return claims;
