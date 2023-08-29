@@ -1,5 +1,7 @@
 package com.alex.security.auth.entity;
 
+import com.alex.security.users.entity.Usuario;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 import org.hibernate.annotations.Where;
 import org.springframework.data.annotation.CreatedDate;
@@ -8,6 +10,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Set;
 
 
 @Data
@@ -35,4 +38,9 @@ public class Role {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
+    @OneToMany(mappedBy = "role")
+    @JsonManagedReference("role_ref")
+    private Set<Usuario> users;
+
 }
+

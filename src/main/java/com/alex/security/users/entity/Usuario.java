@@ -1,12 +1,12 @@
 package com.alex.security.users.entity;
 
 import com.alex.security.auth.entity.Role;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import javax.persistence.*;
 import lombok.Data;
 import org.hibernate.annotations.Where;
 
 import java.time.LocalDateTime;
-import java.util.Set;
 
 
 @Data   // provee todos los getter/setter, toString, @RequiredArgsConstructor
@@ -33,13 +33,10 @@ public class Usuario {
     private LocalDateTime updatedAt;
 
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "user_roles",
-            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id")
-    )
-    private Set<Role> roles;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "role_id")
+    @JsonBackReference("role_ref")
+    private Role role;
 
 
     // // for more control we can use those methods, but for simplicity `@EntityListeners(AuditingEntityListener.class)`
