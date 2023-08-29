@@ -7,16 +7,17 @@ This project demonstrates the implementation of security using Spring Boot 3.0 a
 ⚡️ User registration and login with JWT authentication\
 ⚡️ Password encryption using BCrypt\
 ⚡️ Role-based authorization with Spring Security\
-⚡️ Customized access denied handling
+⚡️ Customized access denied handling\
+⚡️ Role ManyToMany User
 
 ## Technologies
 
-- Spring Boot 3.0.9
+- Spring Boot 3.0.10
 - Spring Security
 - JSON Web Tokens (JWT)
 - BCrypt
 - Maven
-- MySQL
+- PostgreSQL
 
 ## Getting Started
 
@@ -28,21 +29,84 @@ To get started with this project, you will need to have the following installed 
 To build and run the project, follow these steps:
 
 - Clone the repository: `https://github.com/AlexMartin998/spring-boot-3-jwt-skeleton.git`
+
+### Local Environment
+
 - Build the project: `mvn clean install`
 - Run the project: `mvn spring-boot:run`
+- Run DB:
+
+```bash
+docker compose -f docker-compose.dev.yml up
+```
+
+- Connect to a DB:
+
+  - `application.properties`
+    - Use Docker properties
+
+### With Docker
+
+Build JAR
+
+```bash
+mvn clean package -DskipTests
+```
+
+Run Docker Compose
+
+```bash
+docker compose up
+```
+
+App will be running on PORT `3000`
+
+- Consume API with:
+
+```
+http://localhost:3000
+```
 
 ### Running the DB
 
-- Create the required volumes
+Create the required volumes (if external is set to true)
 
 ```bash
+docker volume create spring_postgresql
+docker volume create spring_pgadmin
 docker volume create spring_mysql
 ```
 
-- Create `.env` file based on the `.env.example` file
+Run DB
 
 ```bash
 docker compose -f docker-compose.dev.yml up --build -d
 ```
 
--> The application will be available at http://localhost:8080
+The application will be available at:
+
+```bash
+http://localhost:3000
+```
+
+PgAdmin:
+
+```bash
+http://localhost:8090
+```
+
+Connect to DB with TablePlus
+
+```bash
+# DB HOST
+127.0.0.1
+
+# DB PORT
+5432
+
+# DB USER
+postgres
+
+# DB PASSWORD
+postgres
+```
